@@ -28,7 +28,7 @@ pip install flask werkzeug requests
 PFO2-Redes/
 ├── capturas/
 │   ├── 1_registro.png          # Captura del flujo en cliente CLI
-│   ├── servidorc_onsola.png    # Captura de peticiones HTTP en consola Flask
+│   ├── servidor_consola.png    # Captura de peticiones HTTP en consola Flask
 │   ├── db.png                  # Captura de registros y hashes en SQLite
 │   └── iniciohtml.png         # Captura de interfaz web en navegador
          

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PFO 2 - Sistema de Tareas</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f7fafc;
+            color: #2d3748;
+            max-width: 550px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* Banner de Bienvenida */
+        .bienvenida {
+            text-align: center;
+            background: #ebf8ff;
+            border: 1px solid #bee3f8;
+            padding: 25px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        .bienvenida h1 {
+            color: #2b6cb0;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .bienvenida p {
+            color: #4a5568;
+            font-size: 15px;
+        }
+
+        /* Tarjeta de formularios */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        h2 {
+            font-size: 16px;
+            color: #4a5568;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px 12px;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #3182ce;
+        }
+
+        button {
+            padding: 10px 18px;
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover {
+            background-color: #2b6cb0;
+        }
+
+        /* Consola de resultado */
+        .resultado-box {
+            margin-top: 20px;
+            background-color: #edf2f7;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #2d3748;
+            min-height: 20px;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sección de Bienvenida solicitada por la consigna -->
+    <div class="bienvenida">
+        <h1>¡Bienvenido/a al Sistema de Tareas!</h1>
+        
+    </div>
+
+    <div class="card">
+        <h2>Registro de Usuario</h2>
+        <div class="input-group">
+            <input id="reg_user" type="text" placeholder="Usuario">
+            <input id="reg_pass" type="password" placeholder="Contraseña">
+            <button onclick="registrar()">Registrar</button>
+        </div>
+
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+
+        <h2>Iniciar Sesión</h2>
+        <div class="input-group">
+            <input id="log_user" type="text" placeholder="Usuario">
+            <input id="log_pass" type="password" placeholder="Contraseña">
+            <button onclick="login()">Ingresar</button>
+        </div>
+
+        <h2>Respuesta de la API</h2>
+        <div id="resultado" class="resultado-box">Esperando acción...</div>
+    </div>
+
+    <script>
+        async function registrar() {
+            const u = document.getElementById("reg_user").value;
+            const p = document.getElementById("reg_pass").value;
+            const resBox = document.getElementById("resultado");
+
+            if (!u || !p) {
+                resBox.innerText = "Por favor completá ambos campos.";
+                return;
+            }
+
+            try {
+                const res = await fetch("/registro", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ usuario: u, contraseña: p })
+                });
+                const data = await res.json();
+                resBox.innerText = JSON.stringify(data);
+            } catch (err) {
+                resBox.innerText = "Error al conectar con la API local.";
+            }
+        }
+
+        async function login() {
+            const u = document.getElementById("log_user").value;
+            const p = document.getElementById("log_pass").value;
+            const resBox = document.getElementById("resultado");
+
+            if (!u || !p) {
+                resBox.innerText = "Por favor completá ambos campos.";
+                return;
+            }
+
+            try {
+                const res = await fetch("/login", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({ usuario: u, contraseña: p })
+                });
+                const data = await res.json();
+                resBox.innerText = JSON.stringify(data);
+            } catch (err) {
+                resBox.innerText = "Error al conectar con la API local.";
+            }
+        }
+    </script>
+
+</body>
+</html>

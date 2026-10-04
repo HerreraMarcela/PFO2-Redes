@@ -81,7 +81,7 @@ Ventajas de SQLite:
 ![Consola Servidor](capturas/servidor_consola.png)
 
 ### 3. Base de Datos SQLite (Hashes)
-![Base de Datos SQLite](capturas/DB.png)
+![Base de Datos SQLite](capturas/db.png)
 
 ### 4. Interfaz Web (/tareas)
 ![Interfaz Web](<capturas/iniciohtml.png>)

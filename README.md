@@ -20,7 +20,26 @@ Para instalar todas las librerías necesarias, ejecutá en la terminal:
 pip install flask werkzeug requests
 
 ```
+---
 
+## Estructura del Proyecto
+
+```text
+PFO2-Redes/
+├── capturas/
+│   ├── 1-registro.png          # Captura del flujo en cliente CLI
+│   ├── servidor-consola.png    # Captura de peticiones HTTP en consola Flask
+│   ├── DB.png                  # Captura de registros y hashes en SQLite
+│   └── inicio HTML.png         # Captura de interfaz web en navegador
+├── templates/                  # (Opcional si usás render_template)
+│   └── index.html              # Interfaz web
+├── index.html                  # Cliente web
+├── servidor.py                 # API REST con Flask y SQLite
+├── cliente.py                  # Cliente de terminal interactivo
+├── view_db.py                  # Script para consultar la base de datos
+├── database.db                 # Base de datos SQLite
+└── README.md                   # Documentación del proyecto
+```
 ---
 
 ## Cómo Ejecutar el Proyecto

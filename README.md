@@ -31,8 +31,7 @@ PFO2-Redes/
 │   ├── servidorc_onsola.png    # Captura de peticiones HTTP en consola Flask
 │   ├── db.png                  # Captura de registros y hashes en SQLite
 │   └── iniciohtml.png         # Captura de interfaz web en navegador
-├── templates/                  # (Opcional si usás render_template)
-│   └── index.html              # Interfaz web
+         
 ├── index.html                  # Cliente web
 ├── servidor.py                 # API REST con Flask y SQLite
 ├── cliente.py                  # Cliente de terminal interactivo

@@ -60,11 +60,12 @@ python cliente.py
 
 ---
 
-## Endpoints de la API
-* POST /registro : Registra un usuario y almacena la contraseña hasheada.
-* POST /login : Valida las credenciales comparando hashes seguros.
-* GET /tareas : Muestra la pantalla web con el formulario y mensaje de bienvenida.
-* GET / : Redirige automáticamente a /tareas.
+| Método | Endpoint | Descripción | Códigos HTTP |
+|---|---|---|---|
+| `POST` | `/registro` | Registra un usuario y almacena la contraseña hasheada con `scrypt`. | `200 OK`, `400 Bad Request`, `500 Internal Error` |
+| `POST` | `/login` | Valida credenciales comparando hashes seguros. | `200 OK`, `401 Unauthorized`, `400 Bad Request` |
+| `GET` | `/tareas` | Muestra la pantalla web con el formulario y mensaje de bienvenida. | `200 OK` |
+| `GET` | `/` | Redirige automáticamente a `/tareas`. | `302 Found` |
 
 ---
 

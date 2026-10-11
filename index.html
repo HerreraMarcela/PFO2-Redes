@@ -4,136 +4,315 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PFO 2 - Sistema de Tareas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-            background-color: #f7fafc;
-            color: #2d3748;
-            max-width: 550px;
-            margin: 50px auto;
-            padding: 20px;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 40%, #fee2e2 100%);
+            color: #1f2937;
+            padding: 24px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            top: -60px;
+            right: -60px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 540px;
+            z-index: 10;
         }
 
         /* Banner de Bienvenida */
         .bienvenida {
             text-align: center;
-            background: #ebf8ff;
-            border: 1px solid #bee3f8;
-            padding: 25px 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-        .bienvenida h1 {
-            color: #2b6cb0;
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-        .bienvenida p {
-            color: #4a5568;
-            font-size: 15px;
+            background: #ffffff;
+            border: 1px solid #fecaca;
+            border-top: 5px solid #dc2626;
+            padding: 26px 20px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 25px -5px rgba(220, 38, 38, 0.08);
         }
 
-        /* Tarjeta de formularios */
+        .bienvenida h1 {
+            color: #dc2626;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .bienvenida p {
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Tarjeta principal */
         .card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            padding: 34px 28px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.07);
+            border: 1px solid #f3f4f6;
         }
 
         h2 {
-            font-size: 16px;
-            color: #4a5568;
-            margin-top: 15px;
-            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 800;
+            color: #b91c1c;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.08em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #dc2626;
+            border-radius: 50%;
         }
 
         .input-group {
             display: flex;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         input {
             flex: 1;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 6px;
+            padding: 12px 14px;
+            background: #f9fafb;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
             font-size: 14px;
+            color: #111827;
             outline: none;
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
+
         input:focus {
-            border-color: #3182ce;
+            background: #ffffff;
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.12);
         }
 
         button {
-            padding: 10px 18px;
-            background-color: #3182ce;
-            color: white;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            color: #ffffff;
             border: none;
-            border-radius: 6px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+            font-family: inherit;
+            white-space: nowrap;
         }
+
         button:hover {
-            background-color: #2b6cb0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #f3f4f6;
+            margin: 22px 0;
         }
 
         /* Consola de resultado */
-        .resultado-box {
+        .resultado-wrapper {
             margin-top: 20px;
-            background-color: #edf2f7;
-            padding: 12px;
-            border-radius: 6px;
+        }
+
+        .resultado-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .resultado-box {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            padding: 14px 16px;
+            border-radius: 12px;
             font-family: monospace;
             font-size: 13px;
-            color: #2d3748;
-            min-height: 20px;
+            color: #f87171;
+            min-height: 44px;
             word-break: break-all;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Panel de Tareas */
+        .tareas-panel {
+            display: none; /* Se activa dinámicamente con JS */
+            background: #fff5f5;
+            border: 2px solid #ef4444;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 22px;
+        }
+
+        .tareas-panel h3 {
+            color: #991b1b;
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .tareas-panel p {
+            color: #7f1d1d;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 14px;
+        }
+
+        .tareas-panel ul {
+            list-style: none;
+        }
+
+        .tareas-panel li {
+            padding: 10px 0;
+            border-bottom: 1px solid #fee2e2;
+            color: #374151;
+            font-size: 13.5px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .tareas-panel li:last-child {
+            border-bottom: none;
+        }
+
+        .badge-check {
+            background: #fee2e2;
+            color: #dc2626;
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            border: 1px solid #fca5a5;
+            flex-shrink: 0;
+            margin-top: 1px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Sección de Bienvenida solicitada por la consigna -->
-    <div class="bienvenida">
-        <h1>¡Bienvenido/a al Sistema de Tareas!</h1>
-        
-    </div>
-
-    <div class="card">
-        <h2>Registro de Usuario</h2>
-        <div class="input-group">
-            <input id="reg_user" type="text" placeholder="Usuario">
-            <input id="reg_pass" type="password" placeholder="Contraseña">
-            <button onclick="registrar()">Registrar</button>
+    <div class="container">
+        <!-- Banner de Bienvenida -->
+        <div class="bienvenida">
+            <h1>¡Bienvenido/a al Sistema de Tareas!</h1>
+          
         </div>
 
-        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 20px 0;">
+        <div class="card">
+            <h2>Registro de Usuario</h2>
+            <div class="input-group">
+                <input id="reg_user" type="text" placeholder="Usuario nuevo">
+                <input id="reg_pass" type="password" placeholder="Contraseña">
+                <button type="button" onclick="registrar()">Registrar</button>
+            </div>
 
-        <h2>Iniciar Sesión</h2>
-        <div class="input-group">
-            <input id="log_user" type="text" placeholder="Usuario">
-            <input id="log_pass" type="password" placeholder="Contraseña">
-            <button onclick="login()">Ingresar</button>
+            <hr>
+
+            <h2>Iniciar Sesión</h2>
+            <div class="input-group">
+                <input id="log_user" type="text" placeholder="Tu usuario">
+                <input id="log_pass" type="password" placeholder="Tu contraseña">
+                <button type="button" onclick="login()">Ingresar</button>
+            </div>
+
+            <div class="resultado-wrapper">
+                <div class="resultado-title">Consola de Respuestas de la API</div>
+                <div id="resultado" class="resultado-box">Esperando acción...</div>
+            </div>
+
+            <!-- Panel de Tareas: se mostrará inmediatamente al ingresar -->
+            <div id="panel-tareas" class="tareas-panel">
+                <h3>👋 ¡Hola, <span id="nombre-usuario" style="color: #dc2626;"></span>!</h3>
+                <p>Credenciales validadas con éxito en SQLite. Acceso concedido al panel:</p>
+                <ul>
+                    <li>
+                        <span class="badge-check">✓</span>
+                        <span><b>Tarea 1:</b> Validar funcionamiento del endpoint POST /registro con hash scrypt.</span>
+                    </li>
+                    <li>
+                        <span class="badge-check">✓</span>
+                        <span><b>Tarea 2:</b> Verificar persistencia de usuarios en base de datos SQLite.</span>
+                    </li>
+                    <li>
+                        <span class="badge-check">✓</span>
+                        <span><b>Tarea 3:</b> Visualizar respuestas HTTP y bienvenida del sistema.</span>
+                    </li>
+                </ul>
+            </div>
         </div>
-
-        <h2>Respuesta de la API</h2>
-        <div id="resultado" class="resultado-box">Esperando acción...</div>
     </div>
 
     <script>
         async function registrar() {
-            const u = document.getElementById("reg_user").value;
-            const p = document.getElementById("reg_pass").value;
+            const u = document.getElementById("reg_user").value.trim();
+            const p = document.getElementById("reg_pass").value.trim();
             const resBox = document.getElementById("resultado");
 
             if (!u || !p) {
-                resBox.innerText = "Por favor completá ambos campos.";
+                resBox.style.color = "#f87171";
+                resBox.innerText = "Error: Completá usuario y contraseña.";
                 return;
             }
 
@@ -144,19 +323,31 @@
                     body: JSON.stringify({ usuario: u, contraseña: p })
                 });
                 const data = await res.json();
+                
+                if (res.ok) {
+                    resBox.style.color = "#4ade80";
+                    // Ayuda: pasa el usuario registrado directo al campo de login
+                    document.getElementById("log_user").value = u;
+                } else {
+                    resBox.style.color = "#f87171";
+                }
                 resBox.innerText = JSON.stringify(data);
             } catch (err) {
-                resBox.innerText = "Error al conectar con la API local.";
+                resBox.style.color = "#f87171";
+                resBox.innerText = "Error al conectar con la API.";
             }
         }
 
         async function login() {
-            const u = document.getElementById("log_user").value;
-            const p = document.getElementById("log_pass").value;
+            const u = document.getElementById("log_user").value.trim();
+            const p = document.getElementById("log_pass").value.trim();
             const resBox = document.getElementById("resultado");
+            const panelTareas = document.getElementById("panel-tareas");
+            const nombreSpan = document.getElementById("nombre-usuario");
 
             if (!u || !p) {
-                resBox.innerText = "Por favor completá ambos campos.";
+                resBox.style.color = "#f87171";
+                resBox.innerText = "Error: Completá usuario y contraseña para ingresar.";
                 return;
             }
 
@@ -168,8 +359,20 @@
                 });
                 const data = await res.json();
                 resBox.innerText = JSON.stringify(data);
+
+                // Detección directa por código HTTP o por el mensaje devuelto
+                if (res.ok || (data && data.mensaje === "Login exitoso")) {
+                    resBox.style.color = "#4ade80";
+                    nombreSpan.innerText = u;
+                    panelTareas.style.display = "block"; // Muestra las tareas
+                } else {
+                    resBox.style.color = "#f87171";
+                    panelTareas.style.display = "none";
+                }
             } catch (err) {
-                resBox.innerText = "Error al conectar con la API local.";
+                resBox.style.color = "#f87171";
+                resBox.innerText = "Error al conectar con la API.";
+                panelTareas.style.display = "none";
             }
         }
     </script>

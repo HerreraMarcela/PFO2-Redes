@@ -14,8 +14,8 @@ def inicializar_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS usuarios (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        usuario TEXT UNIQUE,
-        contraseña TEXT
+        usuario TEXT UNIQUE NOT NULL,
+        contraseña TEXT NOT NULL
     )
     """)
 
@@ -28,7 +28,7 @@ def inicializar_db():
 # -------------------------------
 @app.route("/registro", methods=["POST"])
 def registro():
-    data = request.json
+    data = request.get_json(silent=True) or {}
 
     usuario = data.get("usuario")
     contraseña = data.get("contraseña")
@@ -36,7 +36,7 @@ def registro():
     if not usuario or not contraseña:
         return jsonify({"error": "Faltan datos"}), 400
 
-    hash_pass = generate_password_hash(contraseña)
+    hash_pass = generate_password_hash(contraseña, method="scrypt")
 
     try:
         conn = sqlite3.connect("database.db")
@@ -50,7 +50,7 @@ def registro():
         conn.commit()
         conn.close()
 
-        return jsonify({"mensaje": "Usuario registrado correctamente"})
+        return jsonify({"mensaje": "Usuario registrado correctamente"}), 200
 
     except sqlite3.IntegrityError:
         return jsonify({"error": "El usuario ya existe"}), 400
@@ -64,44 +64,46 @@ def registro():
 # -------------------------------
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.json
+    data = request.get_json(silent=True) or {}
 
     usuario = data.get("usuario")
     contraseña = data.get("contraseña")
+
+    if not usuario or not contraseña:
+        return jsonify({"error": "Faltan datos"}), 400
 
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
     cursor.execute("SELECT contraseña FROM usuarios WHERE usuario = ?", (usuario,))
     resultado = cursor.fetchone()
-
     conn.close()
 
     if resultado and check_password_hash(resultado[0], contraseña):
-        return jsonify({"mensaje": "Login exitoso"})
+        return jsonify({"mensaje": "Login exitoso"}), 200
     else:
         return jsonify({"error": "Credenciales incorrectas"}), 401
 
 
 # -------------------------------
-# Página de inicio
+# Redirección a la vista de tareas
 # -------------------------------
 @app.route("/")
 def inicio():
     return redirect("/tareas")
+
 
 # -------------------------------
 # Vista de tareas (frontend)
 # -------------------------------
 @app.route("/tareas", methods=["GET"])
 def tareas():
-    # Lee directamente el index.html en la raíz
     with open("index.html", "r", encoding="utf-8") as f:
         return render_template_string(f.read())
 
 
 # -------------------------------
-# MAIN
+# Ejecución principal
 # -------------------------------
 if __name__ == "__main__":
     inicializar_db()

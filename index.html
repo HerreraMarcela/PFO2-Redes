@@ -250,18 +250,24 @@
             margin-top: 1px;
         }
         @media (max-width: 600px) {
-    .container {
-        width: 95% !important;
-        padding: 15px !important;
-        box-sizing: border-box !important;
-    }
-    .form-group {
+    div[style*="display: flex"], .form-group {
+        display: flex !important;
         flex-direction: column !important;
+        gap: 8px !important;
     }
-    input, button {
+    input {
         width: 100% !important;
+        min-width: 0 !important;
+        height: 44px !important;
         box-sizing: border-box !important;
     }
+    button {
+        width: 100% !important;
+        height: 44px !important;
+        margin-top: 4px !important;
+        box-sizing: border-box !important;
+    }
+
 }
     </style>
 </head>

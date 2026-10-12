@@ -250,25 +250,39 @@
             margin-top: 1px;
         }
         @media (max-width: 600px) {
-    div[style*="display: flex"], .form-group {
+    /* Desarma las filas horizontales y las pone verticales */
+    div[style*="display: flex"],
+    form,
+    .form-group,
+    .input-group {
         display: flex !important;
         flex-direction: column !important;
-        gap: 8px !important;
-    }
-    input {
+        align-items: stretch !important;
+        gap: 10px !important;
         width: 100% !important;
-        min-width: 0 !important;
-        height: 44px !important;
-        box-sizing: border-box !important;
-    }
-    button {
-        width: 100% !important;
-        height: 44px !important;
-        margin-top: 4px !important;
-        box-sizing: border-box !important;
     }
 
+    /* Fuerza a que cada input y botón ocupe todo el ancho */
+    input[type="text"],
+    input[type="password"],
+    input,
+    button {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+        height: 44px !important;
+        box-sizing: border-box !important;
+        display: block !important;
+        margin: 0 !important;
+        font-size: 15px !important;
+    }
+
+    button {
+        margin-top: 4px !important;
+    }
 }
+
+
     </style>
 </head>
 <body>

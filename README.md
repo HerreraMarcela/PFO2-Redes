@@ -2,19 +2,18 @@
 
 ## Descripción
 API REST desarrollada con Flask que permite registrar usuarios, iniciar sesión y gestionar acceso a una vista de tareas.
-Incluye autenticación con contraseñas hasheadasy ersistencia en SQLite.
+Incluye autenticación con contraseñas hasheadas y persistencia en SQLite.
 
 ---
 
 ## Requisitos e Instalación
-* Python 3
-* Flask
-* Werkzeug
-* Requests
 
----
-##  Instalación
-Para instalar todas las librerías necesarias, ejecutá en la terminal:
+### Requisitos previos
+* Python 3.8 o superior
+* pip (administrador de paquetes de Python)
+
+### Instalación
+Para instalar todas las librerías necesarias del proyecto, ejecutá en la terminal:
 
 ```bash
 pip install flask werkzeug requests
@@ -48,16 +47,22 @@ PFO2-Redes/
 python servidor.py
 
 ```
-2. Probar la Interfaz Web:
-Ingresar desde el navegador a: http://127.0.0.1:5000/tareas
+El servidor inicializa automáticamente la base de datos database.db y queda a la escucha en http://127.0.0.1:5000/.
 
-3. Probar el Cliente de Consola:
+2. Probar la Interfaz Web:
+   
+Ingresar desde el navegador a: http://127.0.0.1:5000/tareas
+(También redirige automáticamente desde la raíz http://127.0.0.1:5000/).
+
+4. Probar el Cliente de Consola:
 En otra terminal, ejecutar: 
 
 ``` 
 python cliente.py
 ```
 
+---
+Endpoints de la API
 ---
 
 | Método | Endpoint | Descripción | Códigos HTTP |

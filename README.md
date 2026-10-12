@@ -6,6 +6,12 @@ Incluye autenticación con contraseñas hasheadas y persistencia en SQLite.
 
 ---
 
+## Enlaces
+- App en vivo (Render): https://pfo2-redes.onrender.com/tareas
+- Repositorio: https://github.com/HerreraMarcela/PFO2-Redes
+
+---
+
 ## Requisitos e Instalación
 
 ### Requisitos previos
